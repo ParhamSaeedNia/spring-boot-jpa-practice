@@ -14,47 +14,36 @@ import java.util.Optional;
 @Repository
 public interface UserRepository extends JpaRepository<User, Long> {
     
-    // Custom query using @Query and @Param
     @Query("SELECT u FROM User u WHERE u.email = :email")
     Optional<User> findByEmail(@Param("email") String email);
     
-    // Custom query to find users by name (case-insensitive)
     @Query("SELECT u FROM User u WHERE LOWER(u.name) LIKE LOWER(CONCAT('%', :name, '%'))")
     List<User> findByNameContainingIgnoreCase(@Param("name") String name);
     
-    // Custom query to find users by city
     @Query("SELECT u FROM User u WHERE u.city = :city")
     List<User> findByCity(@Param("city") String city);
     
-    // Custom query to find users by age range
     @Query("SELECT u FROM User u WHERE u.age BETWEEN :minAge AND :maxAge")
     List<User> findByAgeBetween(@Param("minAge") Integer minAge, @Param("maxAge") Integer maxAge);
     
-    // Custom query to find users older than specified age
     @Query("SELECT u FROM User u WHERE u.age > :age")
     List<User> findUsersOlderThan(@Param("age") Integer age);
     
-    // Custom query to find users by name and city
     @Query("SELECT u FROM User u WHERE u.name = :name AND u.city = :city")
     List<User> findByNameAndCity(@Param("name") String name, @Param("city") String city);
     
-    // Custom query to count users by city
     @Query("SELECT COUNT(u) FROM User u WHERE u.city = :city")
     Long countByCity(@Param("city") String city);
     
-    // Custom query to find users with specific email domain
     @Query("SELECT u FROM User u WHERE u.email LIKE CONCAT('%', :domain)")
     List<User> findByEmailDomain(@Param("domain") String domain);
     
-    // Custom query using native SQL
     @Query(value = "SELECT * FROM users WHERE age > :age ORDER BY created_at DESC", nativeQuery = true)
     List<User> findUsersOlderThanOrderByCreatedAt(@Param("age") Integer age);
     
-    // Custom query to find users created in the last N days
     @Query("SELECT u FROM User u WHERE u.createdAt >= CURRENT_DATE - :days DAY")
     List<User> findUsersCreatedInLastDays(@Param("days") Long days);
     
-    // Paginated queries
     @Query("SELECT u FROM User u WHERE u.city = :city")
     Page<User> findByCity(@Param("city") String city, Pageable pageable);
     

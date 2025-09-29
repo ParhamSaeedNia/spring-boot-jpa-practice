@@ -16,87 +16,70 @@ public class UserService {
     @Autowired
     private UserRepository userRepository;
     
-    // Create a new user
     public User createUser(User user) {
         return userRepository.save(user);
     }
     
-    // Get all users
     public List<User> getAllUsers() {
         return userRepository.findAll();
     }
     
-    // Get user by ID
     public Optional<User> getUserById(Long id) {
         return userRepository.findById(id);
     }
     
-    // Get user by email
     public Optional<User> getUserByEmail(String email) {
         return userRepository.findByEmail(email);
     }
     
-    // Find users by name (case-insensitive)
     public List<User> findUsersByName(String name) {
         return userRepository.findByNameContainingIgnoreCase(name);
     }
     
-    // Find users by city
     public List<User> findUsersByCity(String city) {
         return userRepository.findByCity(city);
     }
     
-    // Find users by age range
     public List<User> findUsersByAgeRange(Integer minAge, Integer maxAge) {
         return userRepository.findByAgeBetween(minAge, maxAge);
     }
     
-    // Find users older than specified age
     public List<User> findUsersOlderThan(Integer age) {
         return userRepository.findUsersOlderThan(age);
     }
     
-    // Find users by name and city
     public List<User> findUsersByNameAndCity(String name, String city) {
         return userRepository.findByNameAndCity(name, city);
     }
     
-    // Count users by city
     public Long countUsersByCity(String city) {
         return userRepository.countByCity(city);
     }
     
-    // Find users with specific email domain
     public List<User> findUsersByEmailDomain(String domain) {
         return userRepository.findByEmailDomain(domain);
     }
     
-    // Find users older than specified age ordered by creation date
     public List<User> findUsersOlderThanOrderByCreatedAt(Integer age) {
         return userRepository.findUsersOlderThanOrderByCreatedAt(age);
     }
     
-    // Find users created in the last N days
     public List<User> findUsersCreatedInLastDays(Long days) {
         return userRepository.findUsersCreatedInLastDays(days);
     }
     
-    // Update user
     public User updateUser(User user) {
         return userRepository.save(user);
     }
     
-    // Delete user by ID
     public void deleteUser(Long id) {
         userRepository.deleteById(id);
     }
     
-    // Check if user exists by email
     public boolean userExistsByEmail(String email) {
         return userRepository.findByEmail(email).isPresent();
     }
     
-    // Paginated methods
     public Page<User> getAllUsers(Pageable pageable) {
         return userRepository.findAll(pageable);
     }

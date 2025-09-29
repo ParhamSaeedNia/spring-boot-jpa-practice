@@ -14,10 +14,8 @@ public class DataInitializer implements CommandLineRunner {
     
     @Override
     public void run(String... args) throws Exception {
-        // Clear existing data
         userRepository.deleteAll();
         
-        // Create sample users
         User user1 = new User("John Doe", "john.doe@example.com", 25, "New York");
         User user2 = new User("Jane Smith", "jane.smith@example.com", 30, "Los Angeles");
         User user3 = new User("Bob Johnson", "bob.johnson@test.com", 35, "Chicago");
@@ -27,7 +25,6 @@ public class DataInitializer implements CommandLineRunner {
         User user7 = new User("Eve Miller", "eve.miller@demo.com", 38, "Boston");
         User user8 = new User("Frank Garcia", "frank.garcia@example.com", 45, "Chicago");
         
-        // Save users to database
         userRepository.save(user1);
         userRepository.save(user2);
         userRepository.save(user3);

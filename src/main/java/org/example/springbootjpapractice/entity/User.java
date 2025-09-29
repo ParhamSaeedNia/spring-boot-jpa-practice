@@ -29,11 +29,9 @@ public class User {
     @Column(name = "updated_at")
     private LocalDateTime updatedAt;
     
-    // Default constructor
     public User() {
     }
     
-    // Constructor with required fields
     public User(String name, String email) {
         this.name = name;
         this.email = email;
@@ -41,7 +39,6 @@ public class User {
         this.updatedAt = LocalDateTime.now();
     }
     
-    // Constructor with all fields
     public User(String name, String email, Integer age, String city) {
         this.name = name;
         this.email = email;
@@ -50,8 +47,6 @@ public class User {
         this.createdAt = LocalDateTime.now();
         this.updatedAt = LocalDateTime.now();
     }
-    
-    // Getters and Setters
     public Long getId() {
         return id;
     }
