@@ -5,6 +5,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.jpa.repository.query.Procedure;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
@@ -67,4 +68,7 @@ public interface UserRepository extends JpaRepository<User, Long> {
     
     @Query("SELECT u FROM User u WHERE u.createdAt >= CURRENT_DATE - :days DAY")
     Page<User> findUsersCreatedInLastDays(@Param("days") Long days, Pageable pageable);
+    
+    @Query(value = "CALL get_user_count_by_city(:city_name)", nativeQuery = true) // This is how to call SP
+    Integer getUserCountByCity(@Param("city_name") String cityName);
 }
